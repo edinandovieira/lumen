@@ -29,6 +29,7 @@ class UsuarioController extends Controller
             'password' => 'required'
         ]);
 
+        
         if(! $token = $this->jwt->claims(['email' => $request->email])->attempt($request->only('email','password')))
         {
             return response()->json(['Usuário não encontrado'], 404);
