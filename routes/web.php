@@ -28,3 +28,5 @@ $router->group(['prefix' => 'usuario'], function () use($router){
 
     $router->delete('/{id}/deletar', 'UsuarioController@deletarUsuario');
 });
+
+$router->post('/login', 'UsuarioController@usuarioLogin');
