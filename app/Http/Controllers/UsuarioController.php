@@ -20,6 +20,9 @@ class UsuarioController extends Controller
     {
         //
         $this->jwt = $jwt;
+        $this->middleware('auth:api', [
+            'except' => ['usuarioLogin', 'cadastrarUsuario']
+        ]);
     }
 
     public function usuarioLogin(Request $request)
