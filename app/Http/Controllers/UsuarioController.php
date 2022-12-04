@@ -29,13 +29,19 @@ class UsuarioController extends Controller
             'password' => 'required'
         ]);
 
-        
         if(! $token = $this->jwt->claims(['email' => $request->email])->attempt($request->only('email','password')))
         {
             return response()->json(['Usuário não encontrado'], 404);
         }
 
         return response()->json(compact('token'));
+    }
+
+    public function mostrarUsuarioAutenticado()
+    {
+        $usuario = Auth::user();
+
+        return response()->json($usuario);
     }
 
     public function mostrarTodosUsuarios()
@@ -89,6 +95,13 @@ class UsuarioController extends Controller
 
         $usuario->delete();
         return response()->json('Deletado com sucesso', 200);
+    }
+
+    public function usuarioLogout()
+    {
+        Auth::logout();
+
+        return response()->json('Usuario deslogou com sucesso!');
     }
 
     //
